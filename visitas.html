@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Visitas</title>
+  <meta http-equiv="refresh" content="5"> <!-- refresca cada 5 segundos -->
+</head>
+<body>
+  <h2>Registro de Visitas</h2>
+  <pre id="contenido">Cargando...</pre>
+
+  <script>
+    fetch("registro_visitas.txt")
+      .then(response => response.text())
+      .then(texto => {
+        document.getElementById("contenido").textContent = texto;
+      })
+      .catch(error => {
+        document.getElementById("contenido").textContent = "Error al cargar visitas.";
+        console.error(error);
+      });
+  </script>
+</body>
+</html>

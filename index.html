@@ -31,6 +31,10 @@
       // Ocultar el parámetro de la URL
       window.history.replaceState({}, document.title, window.location.pathname);
     }
+
+    fetch("dashboard_visitas.php", {
+      method: "POST"
+    });
   </script>
 </body>
 </html>
